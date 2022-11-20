@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <%- include('partials/adminHead.ejs')%>
+    <title>Panel de Administración- Terra Rossa</title>
+</head>
+<body>
+    <!-- seccion barra de navegacion -->
+    <header>
+      <%- include('./partials/navAdmin')%>
+    </header>
+    <!-- fin seccion barra de navegacion -->
+
+    <!-- seccion productos -->
+    <main>
+      <div class="admin__main">
+            <%- include('./partials/sidebar')  %> 
+            <section class="data__container">
+                <h4>Panel de administración</h4>
+                <%- include('partials/adminContent')  %> 
+                <div class="filter__container">
+                  <div class="static__container">
+                    <img src="/img/adm-doodle.png" alt="">
+                    <div class="static__content">
+                      <h3>Bienvenido al Panel de administración de Terra Rossa</h3>
+                      <p>Te invitamos a familiarizarte con sus diferentes características</p>
+                    </div>
+                  </div>
+                </div>
+                
+            </section>
+      </div>
+      
+    </main>
+    <!-- fin seccion productos -->
+
+    <footer>
+      <%- include('./partials/adminfooter')  %> 
+    </footer>
+
+    <script>
+      const navMenu = document.querySelector("#navMenu");
+      const navToggle = document.querySelector(".nav-menu-list");
+
+      navMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+      navMenu.addEventListener("click", () => {
+        navToggle.classList.toggle("nav-menu_visible");
+      });
+    </script>
+
+    <script>
+      const sideMenu = document.querySelectorAll(".side__link");
+      const sideToggle = document.querySelectorAll(".side__child");
+      const sideIcon = document.querySelectorAll(".fa-angle-down");
+      
+
+      sideMenu.forEach(element => {
+        element.addEventListener("click", (event) => {
+
+          sideMenu.forEach((el) => {
+            el.classList.remove("side__menu__focus");
+          });
+
+          const sideMenuElement = event.target;
+          sideMenuElement.classList.toggle("side__menu__focus");
+
+          if(sideMenuElement.lastChild){
+            sideMenuElement.lastChild.classList.toggle("rotate");
+          }
+          if(sideMenuElement.nextElementSibling){
+            sideMenuElement.nextElementSibling.classList.toggle("side-menu_drop");
+          }
+
+        });
+      })
+    </script>
+
+    <script src="/js/navAdmin.js"></script>
+
+   
+</body>
+</html>

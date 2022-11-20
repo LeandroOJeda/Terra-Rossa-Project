@@ -1,0 +1,61 @@
+<section class="container">
+  <div class="row">
+    <article class="footer-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="/content/faq">Preguntas frecuentes</a></li>
+        <li><a href="/content/terminos">Términos y condiciones</a></li>
+      </ul>
+    </article>
+    
+    <article class="footer-col">
+      <h4>Redes</h4>
+      <div class="social-links">
+        <a href="https://www.facebook.com/" target="_blank"
+          ><i class="fa-brands fa-facebook-f"></i
+        ></a>
+        <a href="https://twitter.com/" target="_blank"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a href="https://instagram.com/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://linkedin.com/" target="_blank"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+      </div>
+    </article>
+    <img class="footer-img" src="/img/qr-code.png" alt="Código Qr" />
+  </div>
+  <p class="text-foo">
+    BEBER CON MODERACIÓN, PROHIBIDA SU VENTA A MENORES DE 18 AÑOS
+  </p>
+  <p class="copy">Terra Rossa 2022 &copy;, todos los derechos reservados</p>
+</section>
+
+<script>
+    const navMenu = document.querySelector("#navMenu");
+    const navToggle = document.querySelector(".nav-menu-list");
+
+    navMenu.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+    navMenu.addEventListener("click", () => {
+      navToggle.classList.toggle("nav-menu_visible");
+    });
+
+  </script>
+  <script>
+    // activar y desactivar buscador 
+    const searchIcon = document.getElementById("search-icon");
+    const searchArea = document.getElementById("search-input");
+    const signBtn = document.getElementById("sign");
+
+    searchIcon.addEventListener("click", () => {
+      signBtn.classList.toggle("active-search");
+      searchArea.classList.toggle("active-search");
+    });
+  </script>
+
+<script src="/JS/navSearch.js"></script>
+

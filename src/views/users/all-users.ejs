@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <%- include('../partials/adminHead.ejs')%>
+    <title>Ver Usuarios - Terra Rossa</title>
+</head>
+<body>
+    <!-- seccion barra de navegacion -->
+    <header>
+      <%- include('../partials/navAdmin')%>
+    </header>
+    <!-- fin seccion barra de navegacion -->
+
+    <!-- seccion productos -->
+    <main>
+      <div class="admin__main">
+            <%- include('../partials/sidebar')  %> 
+            <section class="data__container">
+                <h4>Panel de administración</h4>
+                <%- include('../partials/adminContent')  %> 
+    
+                <div class="filter__container">
+                    <h3>Usuarios</h3>
+                    <ul class="filter__links filter__userlinks">
+                        <li><a href="">Todos los Usuarios</a></li>
+                        <li><a href="">Administradores</a></li>
+                    </ul>
+                </div>
+                <div class="article__scroll">
+                  <% users.forEach(user => { %>
+                    <article class="productsdash__container">
+                        <div class="productdash_block userdash_block">
+                            <img src="/img/profileImages/<%= user.userImg %>" alt="imagen del producto">
+                            <p><%= user.firstName %></p>
+                            <p><span><%= user.userEmail %></span></p>
+                            <% categories.forEach(category => { %>
+                              <% if(category.idUserCategory == user.idUserCategory) { %>
+                                <p><%= category.userCategoryName %></p>
+                                <% } %>
+                              <% }); %>
+                            
+                        </div>
+                        <div class="productdash_button">
+                          <form class="form__container" method="POST" action="/users/all-users/<%= user.userId%>?_method=DELETE"> 
+                            <button type="submit" class="delete">eliminar</button>
+                            </form>
+                          <a class="update" href="/users/edit-permissions/<%= user.userId%>">actualizar</a>
+                        </div>
+                    </article>
+                  <% }); %>
+                </div>
+            </section>
+      </div>
+      
+    </main>
+    <!-- fin seccion productos -->
+
+    <footer>
+      <%- include('../partials/adminfooter')  %> 
+    </footer>
+
+    <script>
+      const navMenu = document.querySelector("#navMenu");
+      const navToggle = document.querySelector(".nav-menu-list");
+
+      navMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+      navMenu.addEventListener("click", () => {
+        navToggle.classList.toggle("nav-menu_visible");
+      });
+    </script>
+
+    <script>
+      const sideMenu = document.querySelectorAll(".side__link");
+      const sideToggle = document.querySelectorAll(".side__child");
+      const sideIcon = document.querySelectorAll(".fa-angle-down");
+      
+
+      sideMenu.forEach(element => {
+        element.addEventListener("click", (event) => {
+
+          sideMenu.forEach((el) => {
+            el.classList.remove("side__menu__focus");
+          });
+
+          const sideMenuElement = event.target;
+          sideMenuElement.classList.toggle("side__menu__focus");
+
+          if(sideMenuElement.lastChild){
+            sideMenuElement.lastChild.classList.toggle("rotate");
+          }
+          if(sideMenuElement.nextElementSibling){
+            sideMenuElement.nextElementSibling.classList.toggle("side-menu_drop");
+          }
+
+        });
+      })
+    </script>
+<script src="/js/navAdmin.js"></script>
+
+   
+</body>
+</html>

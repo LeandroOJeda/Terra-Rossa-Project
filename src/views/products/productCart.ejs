@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head.ejs')%>
+    <title>Carrito de Compras - Terra Rossa</title>
+  </head>
+  <body>
+    <!-- seccion barra de navegacion -->
+    <header>
+      <%- include('../partials/nav.ejs')%>
+    </header>
+    <!-- fin seccion barra de navegacion -->
+    <% 
+  const formatter = new Intl.NumberFormat("es-AR", { 
+    style: "decimal",
+    minimumFractionDigits: 2,
+  }); 
+  %>
+    <!-- carrito de compras -->
+    <section class="margin__nav">
+      <h1 class="cart__title">carrito</h1>
+      <div class="itemlist__container">
+        <div class="cart__section">
+          <div class="cart__header">
+            <p>producto</p>
+            <p>precio</p>
+            <p>cantidad</p>
+          </div>
+           <!-- aca empieza -->
+           <% if(Array.isArray(carritoFinal) && carritoFinal.length){%>
+            <% carritoFinal.forEach(product => { %>
+            <div class="cart__product">
+              <img src="/img/productImg/<%= product.productImg%>" alt="imagen preview del producto" />
+              <div class="cart__productdetail">
+                <p><span><%=product.productName%></span></p>
+                <div class="cart__buttons">
+                  <p>$<%= formatter.format(product.productPrice)%></p>
+                  <div class="update-quantity-container">
+                    <div class="value-button" id="decrease" value="decrease" data-divProducto="<%=product.idProduct%>">-</div>
+                    <input id="cart-id-product" type="hidden" value="<%=product.idProduct%>">
+                    <input type="number" id="inputValue" value="<%=product.quantity%>" data-inputProducto="<%=product.idProduct%>" name="cantidad"/>
+                    <div class="value-button" id="increase" value="increase" data-divProducto="<%=product.idProduct%>">+</div>
+                  </div>
+                  <form class="delete-cart" method="POST" action="/product/product-cart/<%=product.idProduct%>?_method=DELETE">
+                  <button type="submit"><i class="fa-regular fa-trash-can"></i></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <% })%> 
+          <%} else{%>
+            <div class="cart__productdetail cart__empty">
+              <p>No hay productos en tu carrito de compras</p>
+            </div>
+          <%}%>
+        </div>
+        <!-- aca termina -->
+        <div class="cart__section--media">
+          <div class="cart__minisection">
+            <p>¿Tenés un código de descuento?</p>
+            <div class="cart__code">
+              <form action="" class="form-discount">
+                <input type="text" maxlength="8" value="Ingrese su código" />
+                <button class="cart__btn--checkout" type="submit">aplicar</button>
+                <!-- <a class="cart__btn--checkout" href="">aplicar</a> -->
+              </form>
+            </div>
+          </div>
+          <div class="cart__minisection">
+            <div class="container__total">
+              <div class="total__detail">
+                <p>subtotal:</p>
+                <% if(total >0){%>
+                  <p id="subtotal">$ <%= formatter.format(total)%></p>
+                <% }else{%>
+                  <p>$ 0</p>
+                <% }%>
+              </div>
+              <div class="total__detail">
+                <p>Descuento:</p>
+                  <p>$ 0</p>
+              </div>
+              <div class="total__detail">
+                <p><span>total:</span></p>
+                <div>
+                  <% if(total > 0){%>
+                    <p id="total">$ <%= formatter.format(total)%></p>
+                  <% }else{%>
+                    <p>$ 0</p>
+                  <% }%>
+                  <div class="total__message">
+                    <p>No incluye costos de envío</p>
+                  </div>
+                </div>
+              </div>
+              <a class="cart__btn--checkout" href="/product/checkout">finalizar compra</a>
+              <a class="cart__btn--checkout" href="/product/catalogue">seguir comprando</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- fin carrito de compras -->
+    <footer class="footer">
+      <%- include('../partials/footer.ejs')%>
+    </footer>
+    <script src="/js/updateItemQuantity.js"></script>
+  </body>
+</html>

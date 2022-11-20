@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="img/png" href="/img/logo-web-icon.png" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="login-Container">
+      <header>
+        <section class="cabecera">
+          <a href="/"><img class="cabecera__logo" src="/img/logo-w.png" /></a>
+        </section>
+      </header>
+      <main>
+        <section class="form-container register">
+          <div class="welcome">
+            <div class="mensaje">
+              <h2>TE DAMOS LA BIENVENIDA</h2>
+              <p>¿Ya tenes cuenta? iniciar sesión</p>
+<a href="/users/login"><button class="sign-up-btn">INICIAR SESION</button></a>
+            </div>
+          </div>
+          <form class="formulario" action="/users/register" method="POST" enctype="multipart/form-data">
+            <h2 class="create-account">REGISTRARSE</h2>  
+            <label>Nombre</label>
+            <input type="text" name="nombre" class="nombre"/>
+                  <div id="inName" class="form-warning"></div>
+            <label>Apellido</label>
+            <input type="text" name="apellido" class="apellido"/>                
+                  <div id="lastName" class="form-warning"></div>
+            <label>Email</label>
+            <input type="email" name="email"class="email"/>           
+                <div id="isEmail" class="form-warning"></div>
+            <label>Fecha de Nacimiento</label>
+            <input type="date" name="fechaNacimiento" class="fechaNacimiento"/>
+                <div id="dateBo" class="form-warning"></div>
+            <label>Contraseña</label>
+            <input type="password" name="password" class="password"/>
+                <div id="pass" class="form-warning"></div>
+            <label>Reingresa tu contraseña</label>
+            <input type="password" name="repassword" class="repassword"/>
+                <div id="repass" class="form-warning"></div>
+            <label>Ingrese una imagen de perfil</label>
+            <input type="file" name="profileImage" class="profileImage"/> 
+                <div id="img" class="form-warning"></div>
+            <input id="registerSubmit" type="submit" value="REGISTRAR" />
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </form>
+        </section>
+        <script src="/JS/registerProcess.js"></script>
+        <script src="/JS/registerValidator.js"></script>
+    </body>
+    </html>

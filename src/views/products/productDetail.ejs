@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include('../partials/head.ejs')%>
+    <title>Detalle de Producto - Terra Rossa</title>
+</head>
+<body>
+    <!-- seccion barra de navegacion -->
+    <header>
+      <%- include('../partials/nav.ejs')%>
+    </header>
+  <!-- fin seccion barra de navegacion -->
+  
+  <% 
+  const formatter = new Intl.NumberFormat("es-AR", { 
+    style: "decimal",
+    minimumFractionDigits: 2,
+  }); 
+  %>
+   <!-- contenedor detalle de producto -->
+   <div class="container__pd">
+    <div class="pd__section">
+        <div class="pd__img" id="zoomC">
+          <img src="/img/productImg/<%= coincidencia.productImg %>" alt="imagen del producto">
+        </div>
+        <div class="pd_center">
+          <article class="pd__info">
+            <h2><%= coincidencia.productName%></h2> <span></span>
+            <p><span>AÑO COSECHA: </span> <%= coincidencia.productHarvest%>, <span> VARIEDAD: </span> <%= coincidencia.productVariety%>, <span> CRIANZA: </span> <%= coincidencia.productBreeding%>, <span> POTENCIAL DE GUARDA: </span> <%= coincidencia.productGuard%>.</p>
+            <h3>NOTAS DE CATA</h3>
+            <p><%= coincidencia.productDescription%></p>
+          </article>
+            
+            <form class="pd_buysection" method="POST">
+                <p><span>$ <%= formatter.format(coincidencia.productPrice)%></span></p>
+                <!-- seleccion de producto- incremento y decremento -->
+                <div class="update-quantity-container">
+                  <div class="value-button" id="decrease" value="decrease">-</div>
+                  <input id="cart-id-product" type="hidden" value="<%=coincidencia.idProduct%>">
+                  <input type="number" id="inputValue" value="1" name="cantidad"/>
+                  <div class="value-button" id="increase" value="increase">+</div>
+                </div>
+                <!-- fin seleccion de producto- incremento y decremento -->
+                <div class="cart__btn">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <button class="cart-submit" type="submit">agregar al carrito</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <!-- fin del contenedor detalle de producto -->
+
+  <!-- footer -->
+    <footer class="footer">
+      <%- include('../partials/footer.ejs')%>
+    </footer>
+  <!--  finfooter -->
+  <script src="/js/addItemFromDetail.js"></script>
+</body>
+</html>
